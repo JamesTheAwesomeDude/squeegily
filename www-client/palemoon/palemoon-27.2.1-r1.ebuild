@@ -16,7 +16,7 @@ IUSE="alsa bindist +custom-cflags cups dbus disable-optimize devtools ffmpeg
 	+system-pixman +system-icu"
 
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 
 RDEPEND=">=x11-libs/gtk+-2.24
 	>=sys-libs/glibc-2.17

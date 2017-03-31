@@ -8,7 +8,7 @@ SRC_URI="https://www.hiawatha-webserver.org/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86 ~arm"
+KEYWORDS="amd64 x86 arm"
 IUSE="+cache debug +ipv6 monitor +rproxy +ssl tomahawk +urltoolkit +xslt"
 
 DEPEND="xslt? ( dev-libs/libxslt )
