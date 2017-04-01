@@ -48,6 +48,8 @@ DEPEND="dev-lang/python:2.7
 # unusably unstable.
 # TODO: add ^ to einfo or something
 
+REQUIRED_USE="disable-optimize? ( !custom-cflags !cpu_flags_x86_sse2 )"
+
 mach() {
 	python2.7 mach "$@"
 }
