@@ -5,6 +5,7 @@ HOMEPAGE="http://www.janusvr.com/"
 SRC_URI="http://downloads.janusvr.com/janusvr_linux.tar.gz -> ${P}.tar.gz"
 
 LICENSE="JanusVR-2017"
+
 SLOT="0"
 # Testing until all dependencies are
 # no longer testing… :(
