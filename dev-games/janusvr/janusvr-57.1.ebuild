@@ -62,7 +62,7 @@ RDEPEND="app-arch/bzip2
 	sys-libs/zlib"
 
 src_unpack() {
-	unpack "${A}"
+	unpack ${A}
 	export S="${WORKDIR}/JanusVRBin"
 }
 
