@@ -173,11 +173,11 @@ src_install() {
 	
 	dosym "${P}" "/usr/lib/${PN}"
 	
-	local rel_browsersrc="../../../../../../usr/lib/palemoon"
+	local rel_browsersrc="../../../../../../usr/lib/${PN}"
 	local iconspx="${rel_browsersrc}/browser/chrome/icons/default/default@PX@.png"
 	local iconsres="16 32 48"
 	local icon128="${rel_browsersrc}/browser/icons/mozicon128.png"
-	local iconsdest="/usr/share/icons/hicolor/@PX@x@PX@/apps/palemoon.png"
+	local iconsdest="/usr/share/icons/hicolor/@PX@x@PX@/apps/${PN}.png"
 	
 	for px in ${iconsres}; do
 	 dosym "${iconspx/@PX@/${px}}" "${iconsdest//@PX@/${px}}"
