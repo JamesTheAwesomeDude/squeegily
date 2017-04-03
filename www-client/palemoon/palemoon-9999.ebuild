@@ -68,9 +68,15 @@ ac_opt() {
 	_mozconf_raw_add ac_add_options "${1}"
 }
 
-use_system() {
-	use "system-${1}" &&
-	 ac_opt "--${2:-with}-system-${3:-${1}}"
+moz_use() {
+	if [ "${1}" != "!" ]; then
+	 use "${1}" || return
+	else
+	 shift
+	 use "${1}" && return
+	fi
+	
+	ac_opt "--${2}-${3:-${1}}"
 }
 
 mk_var() {
@@ -97,72 +103,49 @@ mozconfig_init() {
 src_configure() {
 	mozconfig_init
 	
-	if use custom-cflags; then
-	 if use cpu_flags_x86_sse2; then
-	  ac_opt "--enable-optimize=\"${CXXFLAGS} -msse2 -mfpmath=sse\""
-	 else
-	  ac_opt "--enable-optimize=\"${CXXFLAGS}\""
-	 fi
-	elif use cpu_flags_x86_sse2; then
-	 ac_opt "--enable-optimize=\"-O2 -msse2 -mfpmath=sse\""
-	elif use disable-optimize; then
+	if ! use disable-optimize; then
+	 local cxxflags
+	 use custom-cflags &&
+	  cxxflags+="${CXXFLAGS} "
+	 
+	 # Officially suggested flags
+	 # for taking full advantage of
+	 # the SSE2 instruction set
+	 use cpu_flags_x86_sse2 &&
+	  cxxflags+="-msse2 -mfpmath=sse"
+	 
+	 ac_opt "--enable-optimize=\"${cxxflags}\""
+	 
+	else
 	 ac_opt "--disable-optimize"
 	fi
 	
-	if use devtools; then
-	 ac_opt "--enable-devtools"
-	fi
-	
-	if ! use ffmpeg; then
-	 ac_opt "--disable-ffmpeg"
-	fi
-	
-	if use jemalloc; then
-	 ac_opt "--enable-jemalloc"
-	 ac_opt "--enable-jemalloc-lib"
-	fi
-	
-	if use dbus; then
-	 ac_opt "--enable-startup-notification"
-	else
-	 ac_opt "--disable-dbus"
-	fi
-	
-	if ! use cups; then
-	 ac_opt "--disable-printing"
-	fi
-	
-	if use alsa; then
-	 ac_opt "--enable-alsa"
-	fi
-	
-	if ! use pulseaudio; then
-	 ac_opt "--disable-pulseaudio"
-	fi
-	
-	if use gold; then
-	 ac_opt "--enable-gold"
-	fi
-	
-	if use threads; then
-	 ac_opt "--with-pthreads"
-	fi
-	
-	use_system nspr
-	use_system libevent
-	use_system nss
-	use_system jpeg
-	use_system zlib
-	use_system bz2
-	use_system webp
-	use_system png
-	use_system spell enable hunspell
-	use_system ffi enable
-	use_system vpx with libvpx
-	use_system sqlite enable
-	use_system cairo enable
-	use_system pixman enable
-	use_system icu
+	moz_use devtools	enable
+	moz_use "!" ffmpeg	disable
+	moz_use jemalloc	enable
+	moz_use jemalloc	enable	jemalloc-lib
+	moz_use dbus		enable	startup-notification
+	moz_use "!" dbus	disable
+	moz_use "!" cups	disable	printing
+	moz_use alsa		enable
+	moz_use "!" pulseaudio	disable
+	moz_use	gold		enable
+	moz_use threads		with	pthreads
+	moz_use system-nspr	with
+	moz_use system-libevent	with
+	moz_use system-nss	with
+	moz_use system-jpeg	with
+	moz_use system-zlib	with
+	moz_use system-bz2	with
+	moz_use system-webp	with
+	moz_use system-png	with
+	moz_use system-spell	enable	system-hunspell
+	moz_use system-ffi	enable
+	moz_use system-vpx	with	system-libvpx
+	moz_use system-sqlite	enable
+	moz_use system-cairo	enable
+	moz_use system-pixman	enable
+	moz_use system-icu	enable
 	
 	mach configure
 }
