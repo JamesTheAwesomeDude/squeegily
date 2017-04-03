@@ -12,10 +12,10 @@ SRC_URI="https://github.com/MoonchildProductions/Pale-Moon/archive/${PV}_Release
 LICENSE="MPL-2.0
 	!bindist? ( PaleMoon-2016 )"
 
-IUSE="alsa bindist +custom-cflags cups dbus disable-optimize devtools ffmpeg
+IUSE="alsa bindist +custom-optimization cups dbus disable-optimize devtools ffmpeg
 	jemalloc gold pulseaudio threads cpu_flags_x86_sse2\
 	+system-nspr +system-libevent system-nss +system-jpeg +system-zlib +system-bz2\
-	+system-webp +system-png system-spell +system-ffi +system-vpx system-sqlite +system-cairo\
+	+system-webp +system-png system-spell +system-ffi +system-libvpx system-sqlite +system-cairo\
 	+system-pixman +system-icu"
 
 SLOT="0"
@@ -41,7 +41,7 @@ DEPEND="dev-lang/python:2.7
 	system-png? ( media-libs/libpng )
 	system-spell? ( >=app-text/hunspell-1.6.1 )
 	system-ffi? ( dev-libs/libffi )
-	system-vpx? ( media-libs/libvpx )
+	system-libvpx? ( media-libs/libvpx )
 	system-sqlite? ( dev-db/sqlite[secure-delete] )
 	system-cairo? ( x11-libs/cairo )
 	system-pixman? ( x11-libs/pixman )
@@ -51,7 +51,7 @@ DEPEND="dev-lang/python:2.7
 # unusably unstable.
 # TODO: add ^ to einfo or something
 
-REQUIRED_USE="disable-optimize? ( !custom-cflags !cpu_flags_x86_sse2 )"
+REQUIRED_USE="disable-optimize? ( !custom-optimization !cpu_flags_x86_sse2 )"
 
 mach() {
 	python2.7 mach "$@"
@@ -114,7 +114,7 @@ src_configure() {
 	
 	if ! use disable-optimize; then
 	 local cxxflags
-	 use custom-cflags &&
+	 use custom-optimization &&
 	  cxxflags+="${CXXFLAGS} "
 	 
 	 # Officially suggested flags
@@ -150,7 +150,7 @@ src_configure() {
 	moz_use system-png	with
 	moz_use system-spell	enable	system-hunspell
 	moz_use system-ffi	enable
-	moz_use system-vpx	with	system-libvpx
+	moz_use system-libvpx	with
 	moz_use system-sqlite	enable
 	moz_use system-cairo	enable
 	moz_use system-pixman	enable
