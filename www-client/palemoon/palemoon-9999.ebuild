@@ -1,6 +1,6 @@
 EAPI=6
 
-inherit check-reqs git-r3
+inherit check-reqs eutils git-r3
 
 #As per https://developer.palemoon.org/Developer_Guide:Build_Instructions/Pale_Moon/Linux#head:Prerequisites
 export WANT_AUTOCONF="2.13"
@@ -98,6 +98,7 @@ mozconfig_init() {
 	ac_opt "--enable-release"
 	ac_opt "--x-libraries=/usr/$(get_libdir)"
 	mk_var MOZ_MAKE_FLAGS "${MAKEOPTS}"
+	ac_opt "--prefix=/usr"
 }
 
 src_configure() {
@@ -157,4 +158,22 @@ src_compile() {
 src_install() {
 	cd "${T}/pmbuild/"
 	emake DESTDIR="${D}" install
+}
+
+src_install() {
+	cd "${T}/pmbuild/"
+	emake DESTDIR="${D}" install
+	
+	local rel_browsersrc="../../../../../usr/lib/palemoon"
+	local iconspx="${rel_browsersrc}/browser/chrome/icons/default/default@PX@.png"
+	local iconsres="16 32 48"
+	local icon128="${rel_browsersrc}/browser/icons/mozicon128.png"
+	local iconsdest="/usr/share/icons/hicolor/@PX@x@PX@/apps/palemoon.png"
+	
+	for px in ${iconsres}; do
+	 dosym "${iconspx/@PX@/${px}}" "${iconsdest//@PX@/${px}}"
+	done
+	dosym "${icon128}" "${iconsdest//@PX@/128}"
+	
+	domenu "${FILESDIR}/${PN}.desktop"
 }
