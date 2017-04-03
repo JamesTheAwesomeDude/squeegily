@@ -121,6 +121,9 @@ src_configure() {
 	 ac_opt "--disable-optimize"
 	fi
 	
+	use dbus ||
+	 sed -i -r 's/^\(StartupNotify=\).*$/\1false/' "${FILESDIR}/${PN}.desktop"
+	
 	moz_use devtools	enable
 	moz_use "!" ffmpeg	disable
 	moz_use jemalloc	enable
