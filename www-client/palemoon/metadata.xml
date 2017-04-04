@@ -8,8 +8,9 @@
 <use>
 	<flag name="bindist">Disable official Pale Moon branding (icons, name) which 
 		are not binary-redistributable according to upstream.</flag>
-	<flag name="custom-optimization">Build with user-specified compiler optimizations
-		(-Os, -O0, -O1, -O2, -O3, -m*) from CXXFLAGS.</flag>
+	<flag name="custom-cflags">Build with user-specified compiler optimizations
+		(-Os, -O0, -O1, -O2, -O3, -m*) from CXXFLAGS.
+		(reasonably well supported)</flag>
 	<flag name="jemalloc">Enable alternative memory allocator jemalloc.</flag>
 	<flag name="system-bz2">Use the system-wide libbz2 (<pkg>app-arch/bzip2</pkg>)
 		instead of bundled.</flag>

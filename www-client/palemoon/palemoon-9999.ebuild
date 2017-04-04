@@ -15,7 +15,7 @@ EXPERIMENTAL="true"
 LICENSE="MPL-2.0
 	!bindist? ( PaleMoon-2016 )"
 
-IUSE="alsa bindist +custom-optimization cups dbus disable-optimize +devtools ffmpeg
+IUSE="alsa bindist +custom-cflags cups dbus disable-optimize +devtools ffmpeg
 	+jemalloc gold pulseaudio threads cpu_flags_x86_sse2\
 	+system-nspr +system-libevent system-nss +system-jpeg +system-zlib +system-bz2\
 	+system-webp +system-png system-spell +system-ffi +system-libvpx system-sqlite +system-cairo\
@@ -26,14 +26,8 @@ KEYWORDS="~amd64 ~x86"
 
 RDEPEND=">=x11-libs/gtk+-2.24
 	>=sys-libs/glibc-2.17
-	x11-libs/pango"
-
-DEPEND="dev-lang/python:2.7
-	~sys-devel/autoconf-2.13
-	dev-lang/yasm
-	x11-libs/libXt
-	sys-libs/zlib
-	<sys-devel/gcc-5
+	x11-libs/pango
+	ffmpeg? ( media-video/ffmpeg )
 	jemalloc? ( dev-libs/jemalloc )
 	system-nspr? ( >=dev-libs/nspr-4.13.0 )
 	system-libevent? ( dev-libs/libevent )
@@ -41,7 +35,7 @@ DEPEND="dev-lang/python:2.7
 	system-jpeg? ( || ( media-libs/libjpeg-turbo media-libs/jpeg ) )
 	system-bz2? ( app-arch/bzip2 )
 	system-webp? ( media-libs/libwebp )
-	system-png? ( media-libs/libpng )
+	system-png? ( media-libs/libpng[apng] )
 	system-spell? ( >=app-text/hunspell-1.6.1 )
 	system-ffi? ( dev-libs/libffi )
 	system-libvpx? ( media-libs/libvpx )
@@ -49,12 +43,22 @@ DEPEND="dev-lang/python:2.7
 	system-cairo? ( x11-libs/cairo )
 	system-pixman? ( x11-libs/pixman )
 	system-icu? ( dev-libs/icu )"
+
+DEPEND="dev-lang/python:2.7
+	app-arch/unzip
+	app-arch/zip
+	~sys-devel/autoconf-2.13
+	dev-lang/yasm
+	x11-libs/libXt
+	sys-libs/zlib
+	<sys-devel/gcc-5
+	${RDEPEND}"
 # If you compile it with GCC 5,
 # the browser will be
 # unusably unstable.
 # TODO: add ^ to einfo or something
 
-REQUIRED_USE="disable-optimize? ( !custom-optimization !cpu_flags_x86_sse2 )"
+REQUIRED_USE="disable-optimize? ( !custom-cflags !cpu_flags_x86_sse2 )"
 
 mach() {
 	python2.7 mach "$@"
@@ -122,7 +126,7 @@ src_configure() {
 	fi
 	
 	use dbus ||
-	 sed -i -r 's/^\(StartupNotify=\).*$/\1false/' "${FILESDIR}/${PN}.desktop"
+	 sed -i 's/^\(StartupNotify=\).*$/\1false/' "${FILESDIR}/${PN}.desktop"
 	
 	moz_use devtools	enable
 	moz_use "!" ffmpeg	disable
@@ -167,7 +171,7 @@ src_install() {
 	cd "${T}/pmbuild/"
 	emake DESTDIR="${D}" install
 	
-	local rel_browsersrc="../../../../../usr/lib/${PN}"
+	local rel_browsersrc="../../../../../../usr/lib/${PN}"
 	local iconspx="${rel_browsersrc}/browser/chrome/icons/default/default@PX@.png"
 	local iconsres="16 32 48"
 	local icon128="${rel_browsersrc}/browser/icons/mozicon128.png"
