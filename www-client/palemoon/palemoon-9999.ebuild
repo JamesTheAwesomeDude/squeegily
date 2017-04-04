@@ -127,8 +127,11 @@ src_configure() {
 	 ac_opt "--disable-optimize"
 	fi
 	
-	use dbus ||
+	if use dbus; then
+	 cp "${FILESDIR}/${PN}.desktop" "${T}/${PN}.desktop"
+	else
 	 sed 's/^\(StartupNotify=\)\(.*\)$/\1false/' < "${FILESDIR}/${PN}.desktop" > "${T}/${PN}.desktop"
+	fi
 	
 	moz_use devtools	enable
 	moz_use "!" ffmpeg	disable
