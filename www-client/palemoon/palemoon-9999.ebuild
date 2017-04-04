@@ -17,6 +17,7 @@ LICENSE="MPL-2.0
 
 IUSE="alsa bindist +custom-cflags cups dbus disable-optimize +devtools ffmpeg
 	+jemalloc gold pulseaudio threads cpu_flags_x86_sse2\
+	gtk2 gtk3\
 	+system-nspr +system-libevent system-nss +system-jpeg +system-zlib +system-bz2\
 	+system-webp +system-png system-spell +system-ffi +system-libvpx system-sqlite +system-cairo\
 	+system-pixman +system-icu"
@@ -60,7 +61,8 @@ DEPEND="dev-lang/python:2.7
 # TODO: add ^ to einfo or something
 
 REQUIRED_USE="disable-optimize? ( !custom-cflags !cpu_flags_x86_sse2 )
-	necko-wifi? ( dbus )"
+	necko-wifi? ( dbus )
+	^^ ( gtk2 gtk3 )"
 
 mach() {
 	python2.7 mach "$@"
@@ -145,6 +147,8 @@ src_configure() {
 	moz_use	gold		enable
 	moz_use threads		with	pthreads
 	moz_use "!" necko-wifi	disable
+	moz_use gtk2		"enable-default-toolkit=cairo"
+	moz_use gtk3		"enable-default-toolkit=cairo"
 	moz_use system-nspr	with
 	moz_use system-libevent	with
 	moz_use system-nss	with
