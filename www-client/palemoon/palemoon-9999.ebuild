@@ -24,9 +24,10 @@ IUSE="alsa bindist +custom-cflags cups dbus disable-optimize +devtools ffmpeg
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-RDEPEND=">=x11-libs/gtk+-2.24
+RDEPEND=">=x11-libs/gtk+-2.24:2
 	>=sys-libs/glibc-2.17
 	x11-libs/pango
+	alsa? ( media-libs/alsa-lib )
 	ffmpeg? ( media-video/ffmpeg )
 	jemalloc? ( dev-libs/jemalloc )
 	system-nspr? ( >=dev-libs/nspr-4.13.0 )
@@ -58,7 +59,8 @@ DEPEND="dev-lang/python:2.7
 # unusably unstable.
 # TODO: add ^ to einfo or something
 
-REQUIRED_USE="disable-optimize? ( !custom-cflags !cpu_flags_x86_sse2 )"
+REQUIRED_USE="disable-optimize? ( !custom-cflags !cpu_flags_x86_sse2 )
+	necko-wifi? ( dbus )"
 
 mach() {
 	python2.7 mach "$@"
@@ -126,7 +128,7 @@ src_configure() {
 	fi
 	
 	use dbus ||
-	 sed -i 's/^\(StartupNotify=\).*$/\1false/' "${FILESDIR}/${PN}.desktop"
+	 sed 's/^\(StartupNotify=\)\(.*\)$/\1false/' < "${FILESDIR}/${PN}.desktop" > "${T}/${PN}.desktop"
 	
 	moz_use devtools	enable
 	moz_use "!" ffmpeg	disable
@@ -139,6 +141,7 @@ src_configure() {
 	moz_use "!" pulseaudio	disable
 	moz_use	gold		enable
 	moz_use threads		with	pthreads
+	moz_use "!" necko-wifi	disable
 	moz_use system-nspr	with
 	moz_use system-libevent	with
 	moz_use system-nss	with
@@ -182,5 +185,5 @@ src_install() {
 	done
 	dosym "${icon128}" "${iconsdest//@PX@/128}"
 	
-	domenu "${FILESDIR}/${PN}.desktop"
+	domenu "${T}/${PN}.desktop"
 }
