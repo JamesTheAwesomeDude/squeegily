@@ -15,8 +15,8 @@ EXPERIMENTAL="true"
 LICENSE="MPL-2.0
 	!bindist? ( PaleMoon-2016 )"
 
-IUSE="alsa bindist +custom-optimization cups dbus disable-optimize devtools ffmpeg
-	jemalloc gold pulseaudio threads cpu_flags_x86_sse2\
+IUSE="alsa bindist +custom-optimization cups dbus disable-optimize +devtools ffmpeg
+	+jemalloc gold pulseaudio threads cpu_flags_x86_sse2\
 	+system-nspr +system-libevent system-nss +system-jpeg +system-zlib +system-bz2\
 	+system-webp +system-png system-spell +system-ffi +system-libvpx system-sqlite +system-cairo\
 	+system-pixman +system-icu"
