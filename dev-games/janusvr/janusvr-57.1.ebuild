@@ -56,9 +56,8 @@ RDEPEND="app-arch/bzip2
 	media-libs/openexr:0/22
 	media-libs/opus
 	sci-physics/bullet
-	~sys-devel/gcc-5.1.0
-	sys-libs/glibc:2.2
-	sys-libs/libstdc++-v3
+	>=sys-devel/gcc-5.1.0
+	<sys-devel/gcc-6
 	sys-libs/zlib"
 
 src_unpack() {
@@ -66,10 +65,14 @@ src_unpack() {
 	export S="${WORKDIR}/JanusVRBin"
 }
 
+src_prepare() {
+	cp "${DISTDIR}/libopenvr_api-1.0.6-x86_64.so" "${S}/libopenvr_api.so"
+	eapply_user
+}
+
 src_install() {
 	exeinto /opt/"${PN}"
-	doexe "${PN}" "${PN}_websurface" libLeap.so
-	newexe "${DISTDIR}/libopenvr_api-1.0.6-x86_64.so" libopenvr_api.so
+	doexe "${PN}" "${PN}_websurface" libLeap.so libopenvr_api.so
 	dosym "../../opt/${PN}/${PN}" "/usr/bin/${PN}"
 	dosym "../../opt/${PN}/${PN}_websurface" "/usr/bin/${PN}_websurface"
 	insinto /opt/"${PN}"
