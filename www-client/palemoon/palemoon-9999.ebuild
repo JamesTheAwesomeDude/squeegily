@@ -16,7 +16,7 @@ LICENSE="MPL-2.0
 	!bindist? ( PaleMoon-2016 )"
 
 IUSE="alsa bindist +custom-cflags cups dbus disable-optimize +devtools ffmpeg
-	+jemalloc gold pulseaudio threads cpu_flags_x86_sse2\
+	+jemalloc gold pulseaudio threads cpu_flags_x86_sse2 necko-wifi\
 	gtk2 gtk3\
 	+system-nspr +system-libevent system-nss +system-jpeg +system-zlib +system-bz2\
 	+system-webp +system-png system-spell +system-ffi +system-libvpx system-sqlite +system-cairo\
@@ -25,7 +25,8 @@ IUSE="alsa bindist +custom-cflags cups dbus disable-optimize +devtools ffmpeg
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-RDEPEND=">=x11-libs/gtk+-2.24:2
+RDEPEND="gtk2? ( >=x11-libs/gtk+-2.24:2 )
+	gtk3? ( >=x11-libs/gtk+-3.6:3 )
 	>=sys-libs/glibc-2.17
 	x11-libs/pango
 	alsa? ( media-libs/alsa-lib )
@@ -163,18 +164,13 @@ src_configure() {
 	moz_use system-sqlite	enable
 	moz_use system-cairo	enable
 	moz_use system-pixman	enable
-	moz_use system-icu	enable
+	moz_use system-icu	with
 	
 	mach configure
 }
 
 src_compile() {
 	mach build || die
-}
-
-src_install() {
-	cd "${T}/pmbuild/"
-	emake DESTDIR="${D}" install
 }
 
 src_install() {

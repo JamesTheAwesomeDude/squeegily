@@ -22,7 +22,8 @@ IUSE="alsa bindist +custom-cflags cups dbus disable-optimize +devtools ffmpeg
 SLOT="0"
 KEYWORDS="amd64 x86"
 
-RDEPEND=">=x11-libs/gtk+-2.24:2
+RDEPEND="gtk2? ( >=x11-libs/gtk+-2.24:2 )
+	gtk3? ( >=x11-libs/gtk+-3.6:3 )
 	>=sys-libs/glibc-2.17
 	x11-libs/pango
 	alsa? ( media-libs/alsa-lib )
@@ -172,7 +173,7 @@ src_configure() {
 	moz_use system-sqlite	enable
 	moz_use system-cairo	enable
 	moz_use system-pixman	enable
-	moz_use system-icu	enable
+	moz_use system-icu	with
 	
 	mach configure
 }
