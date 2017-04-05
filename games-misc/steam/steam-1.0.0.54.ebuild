@@ -2,10 +2,7 @@ EAPI=6
 
 inherit eutils unpacker udev
 
-DESCRIPTION="Launcher for the Steam software distribution service
- Steam is a software distribution service with an online store, automated
- installation, automatic updates, achievements, SteamCloud synchronized
- savegame and screenshot functionality, and many social features."
+DESCRIPTION="Launcher for the Steam software distribution service"
 HOMEPAGE="http://www.steampowered.com/"
 SRC_URI="https://steamcdn-a.akamaihd.net/client/installer/steam.deb -> ${P/${PN}-/${PN}_}_all.deb"
 
