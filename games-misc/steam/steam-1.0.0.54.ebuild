@@ -24,10 +24,16 @@ RDEPEND="dev-libs/libbsd[abi_x86_32]
 	media-libs/mesa[abi_x86_32]
 	sys-apps/tcp-wrappers[abi_x86_32]
 	sys-apps/util-linux[abi_x86_32]
-	sys-devel/gcc[abi_x86_32]
+	amd64? (
+	 sys-devel/gcc[multilib]
+	 sys-libs/glibc[multilib]
+	)
 	sys-libs/libudev-compat[abi_x86_32]
-	|| ( sys-libs/eudev[abi_x86_32] sys-apps/systemd[abi_x86_32] )
-	sys-libs/glibc[multilib]
+	|| (
+	 sys-fs/eudev[abi_x86_32]
+	 sys-fs/udev[abi_x86_32]
+	 sys-apps/systemd[abi_x86_32]
+	)
 	sys-libs/zlib[abi_x86_32]
 	x11-libs/libdrm[abi_x86_32]
 	x11-libs/libxshmfence[abi_x86_32]
