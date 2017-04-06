@@ -55,10 +55,13 @@ RDEPEND="app-arch/bzip2
 	media-libs/openal
 	media-libs/openexr:0/22
 	media-libs/opus
+	media-plugins/gst-plugins-soup:1.0
 	sci-physics/bullet
 	>=sys-devel/gcc-5.1.0
 	<sys-devel/gcc-6
 	sys-libs/zlib"
+
+DEPEND=""
 
 src_unpack() {
 	unpack ${A}
