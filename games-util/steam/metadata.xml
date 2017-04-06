@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<maintainer type="person">
+	<email>codegeek98@gmail.com</email>
+	<name>James Edington</name>
+</maintainer>
+<use>
+	<flag name="steam_runtime">Use the official Steam Runtime instead of
+		system libraries.</flag>
+</use>
+</pkgmetadata>

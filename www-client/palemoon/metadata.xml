@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-<maintainer type="project">
+<maintainer type="person">
 	<email>codegeek98@gmail.com</email>
-	<name>Gentoo Mozilla Team</name>
+	<name>James Edington</name>
 </maintainer>
 <use>
 	<flag name="bindist">Disable official Pale Moon branding (icons, name) which 
