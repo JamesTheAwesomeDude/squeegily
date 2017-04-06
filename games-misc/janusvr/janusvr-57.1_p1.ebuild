@@ -2,8 +2,7 @@ EAPI=6
 
 DESCRIPTION="Virtual Reality Internet Browser"
 HOMEPAGE="http://www.janusvr.com/"
-SRC_URI="http://downloads.janusvr.com/${PN}_linux.tar.gz -> ${P}.tar.gz
-https://github.com/ValveSoftware/openvr/raw/70acfe9262290ddb789588a7390e5fc60bb20080/bin/linux64/libopenvr_api.so -> libopenvr_api-1.0.6-x86_64.so"
+SRC_URI="http://downloads.janusvr.com/${PN}_linux.tar.gz -> ${P}.tar.gz"
 
 LICENSE="JanusVR-2017"
 SLOT="0"
@@ -68,16 +67,10 @@ src_unpack() {
 	export S="${WORKDIR}/JanusVRBin"
 }
 
-src_prepare() {
-	cp "${DISTDIR}/libopenvr_api-1.0.6-x86_64.so" "${S}/libopenvr_api.so"
-	eapply_user
-}
-
 src_install() {
 	exeinto /opt/"${PN}"
-	doexe "${PN}" "${PN}_websurface" libLeap.so libopenvr_api.so
+	doexe "${PN}" "${PN}_websurface" libLeap.so libopenvr_api.so libQt5Pdf.so.5
 	dosym "../../opt/${PN}/${PN}" "/usr/bin/${PN}"
-	dosym "../../opt/${PN}/${PN}_websurface" "/usr/bin/${PN}_websurface"
 	insinto /opt/"${PN}"
 	doins -r assets
 }
