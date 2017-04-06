@@ -1,0 +1,10 @@
+--- a/usr/bin/steam
++++ b/usr/bin/steam
+@@ -17,6 +17,9 @@
+ # Set up domain for script localization
+ export TEXTDOMAIN=steam
+ 
++# Use system runtime
++export STEAM_RUNTIME=0
++
+ function show_message()

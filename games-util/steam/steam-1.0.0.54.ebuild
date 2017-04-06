@@ -118,7 +118,6 @@ RDEPEND="dev-libs/libbsd[abi_x86_32]
 #	 dev-cpp/tbb[abi_x86_32]
 #	 dev-libs/libappindicator:2[abi_x86_32]
 #	 dev-libs/libindicator:0[abi_x86_32]
-#	 net-misc/networkmanager[abi_x86_32]
 
 DEPEND=""
 
@@ -126,6 +125,12 @@ src_unpack() {
 	mkdir "${WORKDIR}/${P}"
 	cd "${WORKDIR}/${P}"
 	unpack_deb "${A}"
+}
+
+src_prepare() {
+	use steam_runtime ||
+	 eapply "${FILESDIR}/steam-disable-STEAM_RUNTIME.patch"
+	eapply_user
 }
 
 src_install() {
