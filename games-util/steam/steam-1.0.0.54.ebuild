@@ -79,7 +79,7 @@ RDEPEND="dev-libs/libbsd[abi_x86_32]
 	 net-dns/libidn[abi_x86_32]
 	 net-libs/libasyncns[abi_x86_32]
 	 net-misc/curl[abi_x86_32]
-	 || ( net-misc/networkmanager[abi_x86_32] dev-libs/libnm[abi_x86_32] )
+	 || ( dev-libs/libnm[abi_x86_32] net-misc/networkmanager[abi_x86_32] )
 	 net-nds/openldap[abi_x86_32]
 	 cups? ( net-print/cups[abi_x86_32] )
 	 x11-libs/cairo[abi_x86_32]
