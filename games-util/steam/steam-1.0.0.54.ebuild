@@ -44,6 +44,7 @@ RDEPEND="dev-libs/libbsd[abi_x86_32]
 	 dev-libs/expat[abi_x86_32]
 	 dev-libs/glib:2[abi_x86_32]
 	 dev-libs/gmp[abi_x86_32]
+	 dev-libs/libappindicator:2[abi_x86_32]
 	 dev-libs/libdbusmenu[abi_x86_32]
 	 dev-libs/libffi[abi_x86_32]
 	 dev-libs/libgudev[abi_x86_32]
@@ -116,7 +117,6 @@ RDEPEND="dev-libs/libbsd[abi_x86_32]
 	)"
 # Libraries that Steam uses bundled regardless
 #	 dev-cpp/tbb[abi_x86_32]
-#	 dev-libs/libappindicator:2[abi_x86_32]
 #	 dev-libs/libindicator:0[abi_x86_32]
 
 DEPEND=""
