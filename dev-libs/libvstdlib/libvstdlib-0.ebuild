@@ -17,6 +17,6 @@ IUSE="+abi_x86_32"
 S="${WORKDIR}"
 
 multilib_src_install() {
-	dosym ../$(get_libdir)/libstdc++.so.5 \
-		  /usr/$(get_libdir)/libvstdlib_s.so
+	dosym libstdc++.so.5\
+	 /usr/$(get_libdir)/libvstdlib_s.so
 }
