@@ -5,6 +5,6 @@
  export TEXTDOMAIN=steam
  
 +# Use system runtime
-+export STEAM_RUNTIME=0
++export STEAM_RUNTIME="${STEAM_RUNTIME:=0}"
 +
  function show_message()
