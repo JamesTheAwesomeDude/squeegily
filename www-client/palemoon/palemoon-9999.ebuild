@@ -4,7 +4,7 @@ inherit check-reqs eutils git-r3
 
 #As per https://developer.palemoon.org/Developer_Guide:Build_Instructions/Pale_Moon/Linux#head:Prerequisites
 export WANT_AUTOCONF="2.13"
-CHECKREQS_MEMORY="4G"
+CHECKREQS_MEMORY="3413M"
 
 HOMEPAGE="https://linux.palemoon.org/"
 
