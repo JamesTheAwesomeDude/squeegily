@@ -10,9 +10,7 @@ LICENSE="steam"
 SLOT="0"
 KEYWORDS="-* ~amd64 ~x86"
 
-IUSE="+steam_runtime cups vaapi vdpau xinerama +abi_x86_32"
-
-REQUIRED_USE="abi_x86_32"
+IUSE="+steam_runtime cups vaapi vdpau xinerama"
 
 RDEPEND="dev-libs/libbsd[abi_x86_32]
 	dev-libs/libpcre[abi_x86_32,cxx]
@@ -50,7 +48,7 @@ RDEPEND="dev-libs/libbsd[abi_x86_32]
 	 dev-libs/libgudev[abi_x86_32]
 	 dev-libs/libltdl[abi_x86_32]
 	 dev-libs/libpcre-debian:3[abi_x86_32]
-	 dev-libs/libvstdlib[abi_x86_32]
+	 dev-libs/libvstdlib[abi_x86_32(+)]
 	 dev-libs/libxml2[abi_x86_32]
 	 dev-libs/nspr[abi_x86_32]
 	 dev-libs/nss[abi_x86_32]
@@ -83,7 +81,7 @@ RDEPEND="dev-libs/libbsd[abi_x86_32]
 	 net-dns/libidn[abi_x86_32]
 	 net-libs/libasyncns[abi_x86_32]
 	 net-misc/curl[abi_x86_32]
-	 || ( dev-libs/libnm[abi_x86_32] net-misc/networkmanager[abi_x86_32] )
+	 || ( dev-libs/libnm[abi_x86_32(+)] net-misc/networkmanager[abi_x86_32] )
 	 cups? ( net-print/cups[abi_x86_32] )
 	 sys-apps/dbus[abi_x86_32]
 	 sys-apps/tcp-wrappers[abi_x86_32]
