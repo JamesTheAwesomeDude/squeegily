@@ -14,7 +14,7 @@ LICENSE="MPL-2.0
 
 IUSE="alsa bindist +custom-cflags cups dbus disable-optimize +devtools ffmpeg
 	+jemalloc gold pulseaudio threads cpu_flags_x86_sse2 necko-wifi\
-	gtk2 gtk3\
+	+gtk2 gtk3\
 	+system-nspr +system-libevent system-nss +system-jpeg +system-zlib +system-bz2\
 	+system-webp +system-png system-spell +system-ffi +system-libvpx system-sqlite +system-cairo\
 	+system-pixman +system-icu"
@@ -61,10 +61,6 @@ DEPEND="dev-lang/python:2.7
 REQUIRED_USE="disable-optimize? ( !custom-cflags !cpu_flags_x86_sse2 )
 	necko-wifi? ( dbus )
 	^^ ( gtk2 gtk3 )"
-
-mach() {
-	python2.7 mach "$@"
-}
 
 _mozconf_raw_add() {
 	echo "$@" >> "${MOZCONFIG:-${S}/.mozconfig}"
@@ -175,11 +171,11 @@ src_configure() {
 	moz_use system-pixman	enable
 	moz_use system-icu	with
 	
-	mach configure
+	emake -f client.mk configure
 }
 
 src_compile() {
-	mach build || die
+	emake -f client.mk build
 }
 
 src_install() {
