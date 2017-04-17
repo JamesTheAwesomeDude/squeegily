@@ -7,7 +7,8 @@ export WANT_AUTOCONF="2.13"
 CHECKREQS_MEMORY="3413M"
 
 HOMEPAGE="https://linux.palemoon.org/"
-SRC_URI="https://github.com/MoonchildProductions/Pale-Moon/archive/${PV}_Release.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/MoonchildProductions/Pale-Moon/archive/${PV}_Release.tar.gz -> ${P}.tar.gz\
+	https://github.com/JamesTheAwesomeDude/Pale-Moon/commit/4088ced1cd557f9d4f5276407ce62d6f08c1aa4b.patch -> palemoon-virtualenv-multilib.patch"
 
 LICENSE="MPL-2.0
 	!bindist? ( PaleMoon-2016 )"
@@ -105,11 +106,12 @@ mozconfig_init() {
 }
 
 src_unpack() {
-	unpack "${A}"
+	unpack ${A}
 	export S="${WORKDIR}/Pale-Moon-${PV}_Release"
 }
 
 src_prepare() {
+	eapply "${DISTDIR}/palemoon-virtualenv-multilib.patch"
 	use gold &&
 	 eapply "${FILESDIR}/bug_1148523_firefox_gold.patch"
 	eapply_user
