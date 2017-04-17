@@ -1,3 +1,14 @@
+--- js/src/jstypes.h.bak
++++ js/src/jstypes.h
+@@ -185,7 +185,7 @@
+ #define JS_BITS_PER_BYTE 8
+ #define JS_BITS_PER_BYTE_LOG2 3
+ 
+-#if defined(JS_64BIT)
++#if defined(JS_64BIT) && ! defined(__ILP32__)
+ # define JS_BITS_PER_WORD 64
+ #else
+ # define JS_BITS_PER_WORD 32
 --- a/gfx/ycbcr/yuv_row_posix.cpp
 +++ b/gfx/ycbcr/yuv_row_posix.cpp
 @@ -9,7 +9,8 @@

@@ -111,12 +111,10 @@ src_unpack() {
 }
 
 src_prepare() {
-	if [[ "${CHOST}" == *x32 ]]; then
-	 einfo "x32 CHOST detected!"
-	 einfo "Applying x32-specific patches…"
+	if [[ "${CHOST}" == *x32 ]] || [[ -v "PALEMOON_FORCE_X32_PATCHES" ]]; then
+	 einfo "Applying x32-specific patches:"
 	 eapply "${DISTDIR}/palemoon-virtualenv-multilib.patch"
-	 eapply "${FILESDIR}/palemoon-force-32bit-pointerhasher.patch"
-	 eapply "${FILESDIR}/firefox-robust-amd64-ycbcr-check.patch"
+	 eapply "${FILESDIR}/palemoon-fix-x32.patch"
 	fi
 	use gold &&
 	 eapply "${FILESDIR}/bug_1148523_firefox_gold.patch"
