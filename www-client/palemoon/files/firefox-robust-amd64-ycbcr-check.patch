@@ -1,0 +1,11 @@
+--- a/gfx/ycbcr/yuv_row_posix.cpp
++++ b/gfx/ycbcr/yuv_row_posix.cpp
+@@ -9,7 +9,8 @@
+ 
+ extern "C" {
+ 
+-#if defined(ARCH_CPU_X86_64)
++// FIXME: implement x32 assembly (always SSE2)
++#if defined(ARCH_CPU_X86_64) && defined(__LP64__)
+ 
+ // We don't need CPUID guards here, since x86-64 implies SSE2.

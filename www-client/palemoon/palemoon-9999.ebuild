@@ -8,6 +8,7 @@ CHECKREQS_MEMORY="3413M"
 
 HOMEPAGE="https://linux.palemoon.org/"
 
+SRC_URI="https://github.com/JamesTheAwesomeDude/Pale-Moon/commit/4088ced1cd557f9d4f5276407ce62d6f08c1aa4b.patch -> palemoon-virtualenv-multilib.patch"
 EGIT_REPO_URI="https://github.com/MoonchildProductions/Pale-Moon.git"
 EXPERIMENTAL="true"
 
@@ -104,6 +105,16 @@ mozconfig_init() {
 	ac_opt "--x-libraries=/usr/$(get_libdir)"
 	mk_var MOZ_MAKE_FLAGS "${MAKEOPTS}"
 	ac_opt "--prefix=/usr"
+}
+
+src_prepare() {
+	if [[ "${CHOST}" == *x32 ]]; then
+	 einfo "x32 CHOST detected!"
+	 einfo "Applying x32-specific patches…"
+	 eapply "${DISTDIR}/palemoon-virtualenv-multilib.patch"
+	 eapply "${FILESDIR}/palemoon-force-32bit-pointerhasher.patch"
+	 eapply "${FILESDIR}/firefox-robust-amd64-ycbcr-check.patch"
+	fi
 }
 
 src_configure() {
