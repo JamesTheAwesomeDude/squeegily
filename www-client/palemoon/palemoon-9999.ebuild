@@ -117,6 +117,7 @@ src_prepare() {
 	 fi
 	 eapply "${FILESDIR}/palemoon-fix-x32.patch"
 	fi
+	eapply_user
 }
 
 src_configure() {
