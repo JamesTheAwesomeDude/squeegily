@@ -29,7 +29,7 @@
      AC_DEFINE(JS_CPU_X86)
      ;;
 +x86_64*-*x32)
-+    ENABLE_ION=1
++    dnl ENABLE_ION=1
 +    dnl AC_DEFINE(JS_CPU_X32)
 +    ;;
  x86_64*-*)
