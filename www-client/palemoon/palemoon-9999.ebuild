@@ -114,6 +114,7 @@ src_prepare() {
 	  eapply "${DISTDIR}/palemoon-virtualenv-multilib.patch"
 	 else
 	  einfo "palemoon-virtualenv-multilib.patch not needed!"
+	 fi
 	 eapply "${FILESDIR}/palemoon-fix-x32.patch"
 	fi
 }
