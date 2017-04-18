@@ -21,3 +21,17 @@
 +#if defined(ARCH_CPU_X86_64) && defined(__LP64__)
  
  // We don't need CPUID guards here, since x86-64 implies SSE2.
+
+--- a/js/src/configure.in
++++ b/js/src/configure.in
+@@ -2087,6 +2087,10 @@
+     ENABLE_ION=1
+     AC_DEFINE(JS_CPU_X86)
+     ;;
++x86_64*-*x32)
++    ENABLE_ION=1
++    dnl AC_DEFINE(JS_CPU_X32)
++    ;;
+ x86_64*-*)
+     ENABLE_ION=1
+     AC_DEFINE(JS_CPU_X64)
