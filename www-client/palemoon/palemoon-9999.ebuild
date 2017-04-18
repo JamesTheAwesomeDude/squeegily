@@ -110,7 +110,10 @@ mozconfig_init() {
 src_prepare() {
 	if [[ "${CHOST}" == *x32 ]] || [[ -v "PALEMOON_FORCE_X32_PATCHES" ]]; then
 	 einfo "Applying x32-specific patches:"
-	 eapply "${DISTDIR}/palemoon-virtualenv-multilib.patch"
+	 if grep -q lib64 python/virtualenv/virtualenv.py; then
+	  eapply "${DISTDIR}/palemoon-virtualenv-multilib.patch"
+	 else
+	  einfo "palemoon-virtualenv-multilib.patch not needed!"
 	 eapply "${FILESDIR}/palemoon-fix-x32.patch"
 	fi
 }
