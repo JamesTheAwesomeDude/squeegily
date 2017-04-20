@@ -4,7 +4,7 @@ inherit eutils unpacker udev
 
 DESCRIPTION="Launcher for the Steam software distribution service"
 HOMEPAGE="http://www.steampowered.com/"
-SRC_URI="https://steamcdn-a.akamaihd.net/client/installer/steam.deb -> ${P/${PN}-/${PN}_}_all.deb"
+SRC_URI="https://steamcdn-a.akamaihd.net/client/installer/steam.deb -> ${P/-/_}_all.deb"
 
 LICENSE="steam"
 SLOT="0"
@@ -24,14 +24,10 @@ RDEPEND="dev-libs/libbsd[abi_x86_32]
 	 sys-libs/glibc[multilib]
 	)
 	sys-libs/libudev-compat[abi_x86_32]
-	|| (
-	 sys-fs/eudev[abi_x86_32]
-	 sys-fs/udev[abi_x86_32]
-	 sys-apps/systemd[abi_x86_32]
-	)
 	sys-libs/zlib[abi_x86_32]
 	x11-libs/libdrm[abi_x86_32]
 	x11-libs/libxshmfence[abi_x86_32]
+	virtual/libudev[abi_x86_32]
 	!steam_runtime? (
 	 app-crypt/mit-krb5[abi_x86_32]
 	 app-crypt/p11-kit[abi_x86_32]
@@ -141,8 +137,7 @@ src_install() {
 	 (cd "../lib/udev/rules.d/"
 	  udev_dorules "60-HTC-Vive-perms.rules" "99-steam-controller-perms.rules"
 	 )
-	 (cd "share/pixmaps"
-	  doicon "steam.png" "steam_tray_mono.png"
+	 doicon "share/pixmaps/${PN}{,_tray_mono}.png"
 	 )
 	 (cd "share/icons/hicolor/"
 	  local icon_sizes="256 16 24 48 32"
@@ -152,7 +147,7 @@ src_install() {
 	 )
 	 domenu "share/applications/steam.desktop"
 	 insinto "/usr/lib/${PN}/"
-	 use steam_runtime && doins "lib/steam/bootstraplinux_ubuntu12_32.tar.xz"
+	 doins "lib/steam/bootstraplinux_ubuntu12_32.tar.xz"
 	 doman "share/man/man6/steam.6.gz"
 	 dobin "bin/steam" "bin/steamdeps"
 	)

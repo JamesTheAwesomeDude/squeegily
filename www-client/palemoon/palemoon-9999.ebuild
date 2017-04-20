@@ -74,6 +74,10 @@ ac_opt() {
 	_mozconf_raw_add ac_add_options "${1}"
 }
 
+mk_var() {
+	_mozconf_raw_add mk_add_options "${1}=\"${2}\""
+}
+
 moz_use() {
 	if [ "${1}" != "!" ]; then
 	 use "${1}" || return
@@ -83,10 +87,6 @@ moz_use() {
 	fi
 	
 	ac_opt "--${2}-${3:-${1}}"
-}
-
-mk_var() {
-	_mozconf_raw_add mk_add_options "${1}=\"${2}\""
 }
 
 mozconfig_init() {
@@ -109,13 +109,14 @@ mozconfig_init() {
 
 src_prepare() {
 	if [[ "${CHOST}" == *x32 ]] || [[ -v "PALEMOON_FORCE_X32_PATCHES" ]]; then
-	 einfo "Applying x32-specific patches:"
-	 if grep -q lib64 python/virtualenv/virtualenv.py; then
-	  eapply "${DISTDIR}/palemoon-virtualenv-multilib.patch"
-	 else
+	 ewarn "Applying x32-specific patches."
+	 ewarn "These include disabling Elfhack LTO, IonMonkey JIT, and some assembly-"
+	 ewarn "accelerated colorspace conversion code."
+	 grep -q lib64 python/virtualenv/virtualenv.py &&
+	  eapply "${DISTDIR}/palemoon-virtualenv-multilib.patch" ||
 	  einfo "palemoon-virtualenv-multilib.patch not needed!"
-	 fi
 	 eapply "${FILESDIR}/palemoon-fix-x32.patch"
+	 ac_opt "--disable-elf-hack"
 	fi
 	eapply_user
 }

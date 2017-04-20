@@ -71,6 +71,10 @@ ac_opt() {
 	_mozconf_raw_add ac_add_options "${1}"
 }
 
+mk_var() {
+	_mozconf_raw_add mk_add_options "${1}=\"${2}\""
+}
+
 moz_use() {
 	if [ "${1}" != "!" ]; then
 	 use "${1}" || return
@@ -81,10 +85,6 @@ moz_use() {
 	
 	ac_opt "--${2}-${3:-${1}}"
 	
-}
-
-mk_var() {
-	_mozconf_raw_add mk_add_options "${1}=\"${2}\""
 }
 
 mozconfig_init() {
@@ -112,9 +112,13 @@ src_unpack() {
 
 src_prepare() {
 	if [[ "${CHOST}" == *x32 ]] || [[ -v "PALEMOON_FORCE_X32_PATCHES" ]]; then
-	 einfo "Applying x32-specific patches:"
+	 ewarn "Applying x32-specific patches."
+	 ewarn "These include disabling Elfhack LTO, IonMonkey JIT, and some assembly-"
+	 ewarn "accelerated colorspace conversion code."
 	 eapply "${DISTDIR}/palemoon-virtualenv-multilib.patch"
 	 eapply "${FILESDIR}/palemoon-fix-x32.patch"
+	 ac_opt "--disable-elf-hack"
+	 ac_opt "--disable-ion"
 	fi
 	use gold &&
 	 eapply "${FILESDIR}/bug_1148523_firefox_gold.patch"
