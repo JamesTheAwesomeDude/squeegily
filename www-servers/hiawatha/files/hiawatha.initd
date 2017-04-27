@@ -10,7 +10,7 @@ start() {
 	ebegin "Starting ${SVCNAME}"
 	start-stop-daemon --start \
 	 --exec "/usr/sbin/hiawatha" \
-	 --pidfile "@HIAWATHA_PID_DIR@/hiawatha.pid"
+	 --pidfile "/var/run/hiawatha.pid"
 	eend $?
 }
 
@@ -18,6 +18,6 @@ stop() {
 	ebegin "Stopping ${SVCNAME}"
 	start-stop-daemon --stop \
 	 --exec "/usr/sbin/hiawatha" \
-	 --pidfile "@HIAWATHA_PID_DIR@/hiawatha.pid"
+	 --pidfile "/var/run/hiawatha.pid"
 	eend $?
 }

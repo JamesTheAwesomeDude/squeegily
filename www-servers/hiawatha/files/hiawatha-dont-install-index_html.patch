@@ -1,0 +1,9 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -168,8 +168,6 @@
+ 	install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${manpage} DESTINATION ${CMAKE_INSTALL_FULL_MANDIR}/man1)
+ endforeach()
+ 
+-install(FILES extra/index.html DESTINATION ${WEBROOT_DIR})
+-
+ # Create directories

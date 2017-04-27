@@ -138,7 +138,6 @@ src_install() {
 	  udev_dorules "60-HTC-Vive-perms.rules" "99-steam-controller-perms.rules"
 	 )
 	 doicon "share/pixmaps/${PN}{,_tray_mono}.png"
-	 )
 	 (cd "share/icons/hicolor/"
 	  local icon_sizes="256 16 24 48 32"
 	  for px in ${icon_sizes}; do
