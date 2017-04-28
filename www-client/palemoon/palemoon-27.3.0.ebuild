@@ -107,7 +107,7 @@ mozconfig_init() {
 
 src_unpack() {
 	unpack ${A}
-	export S="${WORKDIR}/Pale-Moon-${PV}_Release"
+	S="${WORKDIR}/Pale-Moon-${PV}_Release"
 }
 
 src_prepare() {
@@ -120,8 +120,6 @@ src_prepare() {
 	 ac_opt "--disable-elf-hack"
 	 ac_opt "--disable-ion"
 	fi
-	use gold &&
-	 eapply "${FILESDIR}/bug_1148523_firefox_gold.patch"
 	eapply_user
 }
 
