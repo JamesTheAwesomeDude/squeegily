@@ -4,6 +4,7 @@
 	<maintainer type="person">
 		<name>James Edington</name>
 		<email>codegeek98@gmail.com</email>
+	</maintainer>
 	<longdescription>An advanced and secure webserver for Unix.</longdescription>
 	<use>
 		<flag name="cache">Enable caching content</flag>

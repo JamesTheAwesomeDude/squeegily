@@ -1,3 +1,7 @@
+# Copyright 1999-2017 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# or, at your option, the WTFPL v2
+
 EAPI=6
 
 inherit check-reqs eutils git-r3
@@ -6,12 +10,12 @@ inherit check-reqs eutils git-r3
 export WANT_AUTOCONF="2.13"
 CHECKREQS_MEMORY="3413M"
 
-HOMEPAGE="https://linux.palemoon.org/"
+HOMEPAGE="https://palemoon.org/"
+DESCRIPTION="An Open Source, Goanna-based web browser focusing on efficiency and ease of use"
 
 SRC_URI="https://github.com/JamesTheAwesomeDude/Pale-Moon/commit/4088ced1cd557f9d4f5276407ce62d6f08c1aa4b.patch -> palemoon-virtualenv-multilib.patch"
 EGIT_REPO_URI="https://github.com/MoonchildProductions/Pale-Moon.git"
 EXPERIMENTAL="true"
-
 
 LICENSE="MPL-2.0
 	!bindist? ( PaleMoon-2016 )"
@@ -36,10 +40,10 @@ RDEPEND="gtk2? ( >=x11-libs/gtk+-2.24:2 )
 	system-nspr? ( >=dev-libs/nspr-4.13.0 )
 	system-libevent? ( dev-libs/libevent )
 	system-nss? ( >=dev-libs/nss-3.28.3 )
-	system-jpeg? ( || ( media-libs/libjpeg-turbo media-libs/jpeg ) )
+	system-jpeg? ( virtual/jpeg:0 )
 	system-bz2? ( app-arch/bzip2 )
 	system-webp? ( media-libs/libwebp )
-	system-png? ( media-libs/libpng[apng] )
+	system-png? ( media-libs/libpng:0[apng] )
 	system-spell? ( >=app-text/hunspell-1.6.1 )
 	system-ffi? ( dev-libs/libffi )
 	system-libvpx? ( media-libs/libvpx )
@@ -85,7 +89,7 @@ moz_use() {
 	 shift
 	 use "${1}" && return
 	fi
-	
+
 	ac_opt "--${2}-${3:-${1}}"
 }
 
@@ -123,30 +127,30 @@ src_prepare() {
 
 src_configure() {
 	mozconfig_init
-	
+
 	if ! use disable-optimize; then
 	 local cxxflags
 	 use custom-cflags &&
 	  cxxflags+="${CXXFLAGS} "
-	 
+
 	 # Officially suggested flags
 	 # for taking full advantage of
 	 # the SSE2 instruction set
 	 use cpu_flags_x86_sse2 &&
 	  cxxflags+="-msse2 -mfpmath=sse"
-	 
+
 	 ac_opt "--enable-optimize=\"${cxxflags}\""
-	 
+
 	else
 	 ac_opt "--disable-optimize"
 	fi
-	
+
 	if use dbus; then
 	 cp "${FILESDIR}/${PN}.desktop" "${T}/${PN}.desktop"
 	else
 	 sed 's/^\(StartupNotify=\)\(.*\)$/\1false/' < "${FILESDIR}/${PN}.desktop" > "${T}/${PN}.desktop"
 	fi
-	
+
 	moz_use devtools	enable
 	moz_use "!" ffmpeg	disable
 	moz_use jemalloc	enable
@@ -176,7 +180,7 @@ src_configure() {
 	moz_use system-cairo	enable
 	moz_use system-pixman	enable
 	moz_use system-icu	with
-	
+
 	emake -f client.mk configure
 }
 
@@ -187,17 +191,17 @@ src_compile() {
 src_install() {
 	cd "${T}/pmbuild/"
 	emake DESTDIR="${D}" install
-	
+
 	local rel_browsersrc="../../../../../../usr/lib/${PN}"
 	local iconspx="${rel_browsersrc}/browser/chrome/icons/default/default@PX@.png"
 	local iconsres="16 32 48"
 	local icon128="${rel_browsersrc}/browser/icons/mozicon128.png"
 	local iconsdest="/usr/share/icons/hicolor/@PX@x@PX@/apps/${PN}.png"
-	
+
 	for px in ${iconsres}; do
 	 dosym "${iconspx/@PX@/${px}}" "${iconsdest//@PX@/${px}}"
 	done
 	dosym "${icon128}" "${iconsdest//@PX@/128}"
-	
+
 	domenu "${T}/${PN}.desktop"
 }

@@ -1,51 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-<maintainer type="person">
-	<email>codegeek98@gmail.com</email>
-	<name>James Edington</name>
-</maintainer>
-<use>
-	<flag name="bindist">Disable official Pale Moon branding (icons, name) which 
-		are not binary-redistributable according to upstream.</flag>
-	<flag name="custom-cflags">Build with user-specified compiler optimizations
-		(-Os, -O0, -O1, -O2, -O3, -m*) from CXXFLAGS.
-		(reasonably well supported)</flag>
-	<flag name="jemalloc">Enable alternative memory allocator jemalloc.</flag>
-	<flag name="system-bz2">Use the system-wide libbz2 (<pkg>app-arch/bzip2</pkg>)
-		instead of bundled.</flag>
-	<flag name="system-cairo">Use the system-wide <pkg>x11-libs/cairo</pkg>
-		instead of bundled.</flag>
-	<flag name="system-ffi">Use the system-wide libffi (<pkg>dev-ruby/ffi</pkg>)
-		instead of bundled.</flag>
-	<flag name="system-icu">Use the system-wide ICU (<pkg>dev-libs/icu</pkg>)
-		instead of bundled.</flag>
-	<flag name="system-jpeg">Use the system-wide libjpeg (<pkg>media-libs/libjpeg-turbo</pkg>
-		or <pkg>media-libs/jpeg</pkg>) instead of bundled.</flag>
-	<flag name="system-libevent">Use the system-wide <pkg>dev-libs/libevent</pkg>
-		instead of bundled.</flag>
-	<flag name="system-libvpx">Use the system-wide <pkg>media-libs/libvpx</pkg>
-		instead of bundled.</flag>
-	<flag name="system-sqlite">Use the system-wide <pkg>dev-db/sqlite</pkg>
-		installation with secure-delete enabled</flag>
-	<flag name="system-nspr">Use the system-wide Netscape Portable Runtime
-		(<pkg>dev-libs/nspr</pkg>) instead of bundled.</flag>
-	<flag name="disable-optimize">Disable all compiler optimizations
-		(-Os, -O0, -O1, -O2, -O3, -m*), including defaults.</flag>
-	<flag name="gold">Enable GNU Gold Linker (if not already forced by
-		e.g., EXTRA_ECONF).</flag>
-	<flag name="system-nss">Use the system-wide NSS (<pkg>dev-libs/nss</pkg>)
-		instead of bundled.</flag>
-	<flag name="system-zlib">Use the system-wide libz (<pkg>sys-libs/zlib</pkg>)
-		instead of bundled.</flag>
-	<flag name="system-webp">Use the system-wide libwebp (<pkg>media-libs/libwebp</pkg>)
-		instead of bundled.</flag>
-	<flag name="devtools">Enable Mozilla Developer Tools</flag>
-	<flag name="system-pixman">Use the system-wide pixman (<pkg>x11-libs/pixman</pkg>)
-		instead of bundled.</flag>
-	<flag name="system-png">Use the system-wide libpng (<pkg>media-libs/libpng</pkg>)
-		instead of bundled.</flag>
-	<flag name="system-spell">Use the system-wide spell checker (<pkg>app-text/hunspell</pkg>)
-		instead of bundled.</flag>
-</use>
+	<maintainer type="person">
+		<email>codegeek98@gmail.com</email>
+		<name>James Edington</name>
+	</maintainer>
+	<use>
+		<flag name="bindist">Disable official Pale Moon branding (icons, name) which 
+			are not binary-redistributable according to upstream.</flag>
+		<flag name="gtk2">Build with GTK2</flag>
+		<flag name="gtk3">Build with GTK3</flag>
+		<flag name="custom-cflags">Build with user-specified compiler optimizations
+			(-Os, -O0, -O1, -O2, -O3, -m*) from CXXFLAGS.
+			(reasonably well supported)</flag>
+		<flag name="jemalloc">Enable alternative memory allocator jemalloc.</flag>
+		<flag name="system-bz2">Use the system-wide libbz2 (<pkg>app-arch/bzip2</pkg>)
+			instead of bundled.</flag>
+		<flag name="system-cairo">Use the system-wide <pkg>x11-libs/cairo</pkg>
+			instead of bundled.</flag>
+		<flag name="system-ffi">Use the system-wide libffi (<pkg>dev-ruby/ffi</pkg>)
+			instead of bundled.</flag>
+		<flag name="system-icu">Use the system-wide ICU (<pkg>dev-libs/icu</pkg>)
+			instead of bundled.</flag>
+		<flag name="system-jpeg">Use the system-wide libjpeg (<pkg>media-libs/libjpeg-turbo</pkg>
+			or <pkg>media-libs/jpeg</pkg>) instead of bundled.</flag>
+		<flag name="system-libevent">Use the system-wide <pkg>dev-libs/libevent</pkg>
+			instead of bundled.</flag>
+		<flag name="system-libvpx">Use the system-wide <pkg>media-libs/libvpx</pkg>
+			instead of bundled.</flag>
+		<flag name="system-sqlite">Use the system-wide <pkg>dev-db/sqlite</pkg>
+			installation with secure-delete enabled</flag>
+		<flag name="system-nspr">Use the system-wide Netscape Portable Runtime
+			(<pkg>dev-libs/nspr</pkg>) instead of bundled.</flag>
+		<flag name="disable-optimize">Disable all compiler optimizations
+			(-Os, -O0, -O1, -O2, -O3, -m*), including defaults.</flag>
+		<flag name="gold">Enable GNU Gold Linker (if not already forced by
+			e.g., EXTRA_ECONF).</flag>
+		<flag name="system-nss">Use the system-wide NSS (<pkg>dev-libs/nss</pkg>)
+			instead of bundled.</flag>
+		<flag name="system-zlib">Use the system-wide libz (<pkg>sys-libs/zlib</pkg>)
+			instead of bundled.</flag>
+		<flag name="system-webp">Use the system-wide libwebp (<pkg>media-libs/libwebp</pkg>)
+			instead of bundled.</flag>
+		<flag name="devtools">Enable Mozilla Developer Tools</flag>
+		<flag name="system-pixman">Use the system-wide pixman (<pkg>x11-libs/pixman</pkg>)
+			instead of bundled.</flag>
+		<flag name="system-png">Use the system-wide libpng (<pkg>media-libs/libpng</pkg>)
+			instead of bundled.</flag>
+		<flag name="system-spell">Use the system-wide spell checker (<pkg>app-text/hunspell</pkg>)
+			instead of bundled.</flag>
+		<flag name="necko-wifi">Enable Necko Wi-Fi support (???)</flag>
+	</use>
 </pkgmetadata>

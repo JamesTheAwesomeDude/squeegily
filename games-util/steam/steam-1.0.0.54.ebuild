@@ -1,3 +1,7 @@
+# Copyright 1999-2017 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# or, at your option, the WTFPL v2
+
 EAPI=6
 
 inherit eutils unpacker udev
@@ -14,7 +18,6 @@ IUSE="+steam_runtime cups vaapi vdpau xinerama"
 
 RDEPEND="dev-libs/libbsd[abi_x86_32]
 	dev-libs/libpcre[abi_x86_32,cxx]
-	dev-libs/libusb[abi_x86_32]
 	media-libs/flac[abi_x86_32]
 	media-libs/mesa[abi_x86_32]
 	sys-apps/tcp-wrappers[abi_x86_32]
@@ -28,6 +31,7 @@ RDEPEND="dev-libs/libbsd[abi_x86_32]
 	x11-libs/libdrm[abi_x86_32]
 	x11-libs/libxshmfence[abi_x86_32]
 	virtual/libudev[abi_x86_32]
+	virtual/libusb[abi_x86_32]
 	!steam_runtime? (
 	 app-crypt/mit-krb5[abi_x86_32]
 	 app-crypt/p11-kit[abi_x86_32]
@@ -63,7 +67,6 @@ RDEPEND="dev-libs/libbsd[abi_x86_32]
 	 media-libs/lcms:2[abi_x86_32]
 	 media-libs/libcanberra[abi_x86_32]
 	 media-libs/libexif[abi_x86_32]
-	 || ( media-libs/libjpeg-turbo[abi_x86_32] media-libs/jpeg[abi_x86_32] )
 	 media-libs/libogg[abi_x86_32]
 	 media-libs/libpng[abi_x86_32]
 	 media-libs/libsamplerate[abi_x86_32]
@@ -82,6 +85,7 @@ RDEPEND="dev-libs/libbsd[abi_x86_32]
 	 sys-apps/dbus[abi_x86_32]
 	 sys-apps/tcp-wrappers[abi_x86_32]
 	 sys-apps/util-linux[abi_x86_32]
+	 virtual/jpeg:0[abi_x86_32]
 	 x11-libs/cairo[abi_x86_32]
 	 x11-libs/gdk-pixbuf[abi_x86_32]
 	 x11-libs/gtk+:2[abi_x86_32]
@@ -123,7 +127,7 @@ DEPEND=""
 src_unpack() {
 	mkdir "${WORKDIR}/${P}"
 	cd "${WORKDIR}/${P}"
-	unpack_deb "${A}"
+	unpack_deb ${A}
 }
 
 src_prepare() {
