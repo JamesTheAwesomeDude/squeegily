@@ -19,10 +19,10 @@ RESTRICT="strip mirror"
 RDEPEND="app-arch/bzip2
 	app-arch/snappy
 	dev-db/sqlite:3
-	dev-lang/perl:0/5.22
+	dev-lang/perl
 	dev-libs/double-conversion
 	dev-libs/glib:2
-	dev-libs/icu:0/58.1
+	dev-libs/icu
 	dev-libs/leveldb
 	dev-libs/libbsd
 	dev-libs/libpcre-debian:3
@@ -42,6 +42,7 @@ RDEPEND="app-arch/bzip2
 	dev-qt/qtwidgets:5
 	dev-qt/qtxml:5
 	media-gfx/graphite2
+	media-libs/assimp
 	media-libs/flac
 	media-libs/freetype:2
 	media-libs/glu
