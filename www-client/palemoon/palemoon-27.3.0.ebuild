@@ -20,7 +20,7 @@ LICENSE="MPL-2.0
 	!bindist? ( PaleMoon-2016 )"
 
 IUSE="alsa bindist +custom-cflags cups dbus disable-optimize +devtools ffmpeg\
-	+jemalloc gold pulseaudio threads cpu_flags_x86_sse2 necko-wifi\
+	+jemalloc gold +pulseaudio threads cpu_flags_x86_sse2 necko-wifi\
 	+gtk2 gtk3\
 	+system-nspr +system-libevent system-nss +system-jpeg +system-zlib +system-bz2\
 	+system-webp +system-png system-spell +system-ffi +system-libvpx system-sqlite +system-cairo\
@@ -67,7 +67,8 @@ DEPEND="dev-lang/python:2.7
 
 REQUIRED_USE="disable-optimize? ( !custom-cflags !cpu_flags_x86_sse2 )
 	necko-wifi? ( dbus )
-	^^ ( gtk2 gtk3 )"
+	^^ ( gtk2 gtk3 )
+	^^ ( pulseaudio alsa )"
 
 _mozconf_raw_add() {
 	echo "$@" >> "${MOZCONFIG:-${S}/.mozconfig}"
