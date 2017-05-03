@@ -10,6 +10,8 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 LICENSE="|| ( GPL-2 WTFPL-2 )"
 
+KEYWORDS="-* amd64 x86"
+
 RDEPEND="x86? ( sys-libs/libstdc++-v3 )
 	!x86? ( sys-libs/libstdc++-v3[multilib] )"
 
